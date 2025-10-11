@@ -1,26 +1,58 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@theme {
+
+  
+  /* UI element colors - derived from the app */
+  --color-orange-500: #f97316;
+  --color-red-600: #dc2626;
+  --color-red-700: #b91c1c;
+
+  /* Gradient background colors */
+  --color-dark-gradient-from: #0e0f11;
+  --color-dark-gradient-to: #1a1b1e;
+  --color-dark-card: #141517;
+
+  /* Progress bar color */
+  --color-progress: #ff4500;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Base styles */
+body {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-orange-500) white;
+  }
+
+  .dark * {
+    scrollbar-color: var(--color-orange-500) black;
+  }
+
+  /* Optional: overlay scrolling */
+  html, body {
+    overflow-y: auto;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Customize NProgress bar to be more like YouTube's */
+#nprogress .bar {
+  background: var(--color-progress) !important;
+  height: 3px !important;
+  z-index: 1031 !important;
+}
+
+/* Remove the annoying spinning dots */
+#nprogress .spinner {
+  display: none !important;
+}
+
+/* Remove the gradient peg */
+#nprogress .peg {
+  box-shadow: none !important;
 }
